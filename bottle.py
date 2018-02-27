@@ -69,10 +69,10 @@ if __name__ == '__main__':
 ###############################################################################
 
 
-import base64, cgi, email.utils, functools, hmac, imp, itertools, mimetypes,\
-        os, re, tempfile, threading, time, warnings, weakref, hashlib
+import os, re, base64, cgi, email.utils, functools, hmac, itertools, mimetypes
+import tempfile, threading, time, warnings, weakref, hashlib
 
-from types import FunctionType
+from types import FunctionType, ModuleType
 from datetime import date as datedate, datetime, timedelta
 from tempfile import TemporaryFile
 from traceback import format_exc, print_exc
@@ -2040,7 +2040,7 @@ class _ImportRedirect(object):
         """ Create a virtual package that redirects imports (see PEP 302). """
         self.name = name
         self.impmask = impmask
-        self.module = sys.modules.setdefault(name, imp.new_module(name))
+        self.module = sys.modules.setdefault(name, ModuleType(name))
         self.module.__dict__.update({
             '__file__': __file__,
             '__path__': [],
