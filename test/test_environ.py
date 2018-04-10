@@ -489,14 +489,14 @@ class TestResponse(unittest.TestCase):
         from functools import partial
         make_res = partial(BaseResponse, '', 200)
 
-        self.assertEqual('yay', make_res(x_test='yay')['x-test'])
+        self.assertEquals('yay', make_res(x_test='yay')['x-test'])
 
     def test_wsgi_header_values(self):
         def cmp(app, wire):
             rs = BaseResponse()
             rs.set_header('x-test', app)
             result = [v for (h, v) in rs.headerlist if h.lower()=='x-test'][0]
-            self.assertEqual(wire, result)
+            self.assertEquals(wire, result)
 
         if bottle.py3k:
             cmp(1, tonat('1', 'latin1'))

@@ -72,10 +72,5 @@ class TestResourceManager(unittest.TestCase):
     def test_open(self):
         rm = ResourceManager()
         rm.add_path(__file__)
-        given_fp = rm.open(__file__)
-        expected_fp = open(__file__)
-        try:
-            self.assertEqual(given_fp.read(), expected_fp.read())
-        finally:
-            given_fp.close()
-            expected_fp.close()
+        fp = rm.open(__file__)
+        self.assertEqual(fp.read(), open(__file__).read())
